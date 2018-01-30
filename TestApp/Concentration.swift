@@ -13,6 +13,8 @@ class Concentration {
     
     var indexOfOneFaceUpCard: Int?
     
+    var flipCount = 0
+    
     func chooseCard(at index: Int){
         if !cards[index].isMatched {
             if let matchIndex = indexOfOneFaceUpCard, matchIndex != index {
@@ -37,6 +39,31 @@ class Concentration {
             let card = Card()
             cards += [card, card]
         }
-        //TODO: Shuffle cards
+        //Shuffle cards
+        if (cards.count > 0) {
+            var newCardArray = [Card]()
+            for _ in cards {
+                let randomItem = arc4random_uniform(UInt32(cards.count))
+                let ChosenItem = cards[Int(randomItem)]
+                newCardArray.append(ChosenItem)
+                cards.remove(at: Int(randomItem))
+            }
+            cards = newCardArray
+        }
+    }
+    
+    func newFlip() {
+        flipCount = flipCount + 1
+    }
+    
+    func restartGame () {
+        flipCount = 0
+        var count = 0
+        Card.uniqueIdentifierFactory = 0
+        for _ in cards {
+            cards[count].isMatched = false
+            cards[count].isFaceUp = false
+            count = count + 1
+        }
     }
 }
