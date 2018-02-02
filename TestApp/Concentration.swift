@@ -17,7 +17,6 @@ class Concentration {
     
     func chooseCard(at index: Int){
         if cards[index].reset == true {
-//            cards[index].identifier = nil Oh yeah
             cards[index].reset = false
         }
         if !cards[index].isMatched {
