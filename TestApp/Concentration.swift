@@ -39,22 +39,26 @@ class Concentration {
         }
     }
     
-    init (numberOfPairsOfCards: Int){
-        for _ in 0..<numberOfPairsOfCards{
-            let card = Card()
-            cards += [card, card]
-        }
-        //Shuffle cards
+    //Shuffle cards
+    func shuffle() -> Array<Card> {
+        var newCardArray = [Card]()
         if (cards.count > 0) {
-            var newCardArray = [Card]()
             for _ in cards {
                 let randomItem = arc4random_uniform(UInt32(cards.count))
                 let ChosenItem = cards[Int(randomItem)]
                 newCardArray.append(ChosenItem)
                 cards.remove(at: Int(randomItem))
             }
-            cards = newCardArray
         }
+        return newCardArray
+    }
+    
+    init (numberOfPairsOfCards: Int){
+        for _ in 0..<numberOfPairsOfCards{
+            let card = Card()
+            cards += [card, card]
+        }
+        cards = shuffle()
     }
     
     func newFlip() {
@@ -70,15 +74,6 @@ class Concentration {
             cards[count].isFaceUp = false
             count = count + 1
         }
-        if (cards.count > 0) {
-            var newCardArray = [Card]()
-            for _ in cards {
-                let randomItem = arc4random_uniform(UInt32(cards.count))
-                let ChosenItem = cards[Int(randomItem)]
-                newCardArray.append(ChosenItem)
-                cards.remove(at: Int(randomItem))
-            }
-            cards = newCardArray
-        }
+        cards = shuffle()
     }
 }
