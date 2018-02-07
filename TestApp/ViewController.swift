@@ -31,6 +31,12 @@ class ViewController: UIViewController {
     }
     
     @IBAction func topicSelect(_ sender: UIButton) {
+        //reset emoji list
+        emojiList = [
+            ["🐶", "🐭", "🐰", "🐱", "🦏", "🐘", "🐷", "🐴", "🐍", "🐳"],
+            ["👩🏿‍🌾", "👩‍🎤", "👮", "👨🏻‍🏫", "🤡", "👩‍🚀", "🏃🏿", "👩🏼‍⚕️", "🤠", "🚶"],
+            ["🍕", "🍝", "🍌", "🥖", "🍜", "🥔", "🍔", "🍟", "🍭", "🍫"]
+        ]
         emoji = [Int:String]()
         themeIndex = topicButtons.index(of: sender)!
         game.restartGame()
@@ -39,6 +45,12 @@ class ViewController: UIViewController {
     }
     
     @IBAction func restartButton(_ sender: UIButton) {
+        //reset emoji list
+        emojiList = [
+            ["🐶", "🐭", "🐰", "🐱", "🦏", "🐘", "🐷", "🐴", "🐍", "🐳"],
+            ["👩🏿‍🌾", "👩‍🎤", "👮", "👨🏻‍🏫", "🤡", "👩‍🚀", "🏃🏿", "👩🏼‍⚕️", "🤠", "🚶"],
+            ["🍕", "🍝", "🍌", "🥖", "🍜", "🥔", "🍔", "🍟", "🍭", "🍫"]
+        ]
         emoji = [Int:String]()
         game.restartGame()
         flipCountLabel.text = "Flips: \(game.flipCount)"
@@ -60,6 +72,7 @@ class ViewController: UIViewController {
         }
     }
     
+        //reset emoji list
     var emojiList = [
         ["🐶", "🐭", "🐰", "🐱", "🦏", "🐘", "🐷", "🐴", "🐍", "🐳"],
         ["👩🏿‍🌾", "👩‍🎤", "👮", "👨🏻‍🏫", "🤡", "👩‍🚀", "🏃🏿", "👩🏼‍⚕️", "🤠", "🚶"],

@@ -11,6 +11,8 @@ import Foundation
 class Concentration {
     var cards = [Card]()
     
+//    var emojiList = Emoji()
+    
     var indexOfOneFaceUpCard: Int?
     
     var flipCount = 0
