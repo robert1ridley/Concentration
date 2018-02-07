@@ -31,12 +31,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func topicSelect(_ sender: UIButton) {
-        //reset emoji list
-        emojiList = [
-            ["🐶", "🐭", "🐰", "🐱", "🦏", "🐘", "🐷", "🐴", "🐍", "🐳"],
-            ["👩🏿‍🌾", "👩‍🎤", "👮", "👨🏻‍🏫", "🤡", "👩‍🚀", "🏃🏿", "👩🏼‍⚕️", "🤠", "🚶"],
-            ["🍕", "🍝", "🍌", "🥖", "🍜", "🥔", "🍔", "🍟", "🍭", "🍫"]
-        ]
+        resetEmojiList()
         emoji = [Int:String]()
         themeIndex = topicButtons.index(of: sender)!
         game.restartGame()
@@ -45,12 +40,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func restartButton(_ sender: UIButton) {
-        //reset emoji list
-        emojiList = [
-            ["🐶", "🐭", "🐰", "🐱", "🦏", "🐘", "🐷", "🐴", "🐍", "🐳"],
-            ["👩🏿‍🌾", "👩‍🎤", "👮", "👨🏻‍🏫", "🤡", "👩‍🚀", "🏃🏿", "👩🏼‍⚕️", "🤠", "🚶"],
-            ["🍕", "🍝", "🍌", "🥖", "🍜", "🥔", "🍔", "🍟", "🍭", "🍫"]
-        ]
+        resetEmojiList()
         emoji = [Int:String]()
         game.restartGame()
         flipCountLabel.text = "Flips: \(game.flipCount)"
@@ -72,22 +62,35 @@ class ViewController: UIViewController {
         }
     }
     
-        //reset emoji list
     var emojiList = [
         ["🐶", "🐭", "🐰", "🐱", "🦏", "🐘", "🐷", "🐴", "🐍", "🐳"],
         ["👩🏿‍🌾", "👩‍🎤", "👮", "👨🏻‍🏫", "🤡", "👩‍🚀", "🏃🏿", "👩🏼‍⚕️", "🤠", "🚶"],
         ["🍕", "🍝", "🍌", "🥖", "🍜", "🥔", "🍔", "🍟", "🍭", "🍫"]
     ]
     
+    var resetList: [[String]] = [[],[],[]]
+    
     var emoji = [Int:String]()
     
     func emoji(for card: Card) -> String {
         if emoji[card.identifier] == nil, emojiList[themeIndex].count > 0 {
             let randomIndex = Int(arc4random_uniform(UInt32(emojiList[themeIndex].count)))
+            resetList[themeIndex].append(emojiList[themeIndex][randomIndex])
             emoji[card.identifier] = emojiList[themeIndex].remove(at: randomIndex)
         }
         
         return emoji[card.identifier] ?? "?"
+    }
+    
+    func resetEmojiList() {
+        var count = 0
+        for set in resetList {
+            for singleEmoji in set {
+                resetList[count].remove(at: resetList[count].index(of: singleEmoji)!)
+                emojiList[count].append(singleEmoji)
+            }
+            count = count + 1
+        }
     }
 }
 
