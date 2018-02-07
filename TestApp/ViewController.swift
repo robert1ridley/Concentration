@@ -10,8 +10,7 @@ import UIKit
 
 class ViewController: UIViewController {
     lazy var game = Concentration (numberOfPairsOfCards: (cardButtons.count + 1) / 2)
-    
-    var themeIndex = 0
+    var themeIndex: Int = 0
     
     @IBOutlet weak var flipCountLabel: UILabel!
     
@@ -21,6 +20,8 @@ class ViewController: UIViewController {
     
     @IBAction func touchButton(_ sender: UIButton) {
         if resetList.count < 1 {
+            let randomNum = arc4random_uniform(UInt32(emojiList.count))
+            themeIndex = Int(randomNum)
             populateReset()
         }
         game.newFlip()
