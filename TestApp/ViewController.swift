@@ -24,7 +24,6 @@ class ViewController: UIViewController {
             themeIndex = Int(randomNum)
             populateReset()
         }
-        game.newFlip()
         if let cardNumber = cardButtons.index(of: sender) {
             game.chooseCard(at: cardNumber)
             updateViewFromModel()
@@ -40,19 +39,19 @@ class ViewController: UIViewController {
         themeIndex = topicButtons.index(of: sender)!
         game.restartGame()
         updateViewFromModel()
-        flipCountLabel.text = "Flips: \(game.flipCount)"
+        flipCountLabel.text = "Score: \(game.flipCount)"
     }
     
     @IBAction func restartButton(_ sender: UIButton) {
         resetEmojiList()
         emoji = [Int:String]()
         game.restartGame()
-        flipCountLabel.text = "Flips: \(game.flipCount)"
+        flipCountLabel.text = "Score: \(game.flipCount)"
         updateViewFromModel()
     }
     
     func updateViewFromModel(){
-        flipCountLabel.text = "Flips: \(game.flipCount)"
+        flipCountLabel.text = "Score: \(game.flipCount)"
         for index in cardButtons.indices {
             let button = cardButtons[index]
             let card = game.cards[index]

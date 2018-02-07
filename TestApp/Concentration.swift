@@ -24,7 +24,8 @@ class Concentration {
                 if cards[matchIndex].identifier == cards[index].identifier {
                     cards[matchIndex].isMatched = true
                     cards[index].isMatched = true
-                }
+                    flipCount = flipCount + 2
+                }else{flipCount = flipCount - 1}
                 cards[index].isFaceUp = true
                 indexOfOneFaceUpCard = nil
             } else {
@@ -57,10 +58,6 @@ class Concentration {
             cards += [card, card]
         }
         cards = shuffle()
-    }
-    
-    func newFlip() {
-        flipCount = flipCount + 1
     }
     
     func restartGame () {
