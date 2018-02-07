@@ -20,6 +20,9 @@ class ViewController: UIViewController {
     @IBOutlet var topicButtons: [UIButton]!
     
     @IBAction func touchButton(_ sender: UIButton) {
+        if resetList.count < 1 {
+            populateReset()
+        }
         game.newFlip()
         if let cardNumber = cardButtons.index(of: sender) {
             game.chooseCard(at: cardNumber)
@@ -64,13 +67,22 @@ class ViewController: UIViewController {
     
     var emojiList = [
         ["🐶", "🐭", "🐰", "🐱", "🦏", "🐘", "🐷", "🐴", "🐍", "🐳"],
-        ["👩🏿‍🌾", "👩‍🎤", "👮", "👨🏻‍🏫", "🤡", "👩‍🚀", "🏃🏿", "👩🏼‍⚕️", "🤠", "🚶"],
-        ["🍕", "🍝", "🍌", "🥖", "🍜", "🥔", "🍔", "🍟", "🍭", "🍫"]
+        ["👩🏿‍🌾", "👩‍🎤", "👮", "👨🏻‍🏫", "💂🏼‍♀️", "👩‍🚀", "👨🏿‍🚒", "👩🏼‍⚕️", "👶🏿", "👨🏽‍✈️"],
+        ["🍕", "🍝", "🍌", "🥖", "🍜", "🥔", "🍔", "🍟", "🍭", "🍫"],
+        ["🚗", "🚑", "🚀", "⛴", "🚁", "🛴", "🚜", "✈️", "🛰", "🚛"],
+        ["⚽️", "🏀", "🏈", "⚾️", "🎾", "🏐", "🎱", "🏓", "🏸", "🏏"],
+        ["🎰", "🎮", "🎳", "🎯", "🎲", "🎻", "🎸", "🎺", "🎷", "🎨"]
     ]
     
-    var resetList: [[String]] = [[],[],[]]
+    var resetList: [[String]] = []
     
     var emoji = [Int:String]()
+    
+    func populateReset() {
+        for _ in emojiList {
+            resetList.append([])
+        }
+    }
     
     func emoji(for card: Card) -> String {
         if emoji[card.identifier] == nil, emojiList[themeIndex].count > 0 {
